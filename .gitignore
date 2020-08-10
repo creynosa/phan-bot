@@ -1,1 +1,16 @@
+.idea/*
+target/*
+*.iml
+*.db
+token*
+Reactions
+dependency-reduced-pom.xml
+discord_bots_token
+.env
+/target/
+
+*.DS_Store
+.settings/
+.classpath
+.project
 /venv/
