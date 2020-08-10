@@ -22,7 +22,7 @@ class RoleAssigners(commands.Cog):
         roleEmbed = discord.Embed(
             color=0x00ADEF,
             description="""
-            React with the appropriate emoji to self-assign your roles.
+            React with the appropriate emojis to self-assign your roles.
             
             <:raid:737553929411493930>  :  @raids
             <:fractal:737553944410062898>  :  @fractals
@@ -62,8 +62,6 @@ class RoleAssigners(commands.Cog):
                    """
         )
         await mainRoleMessage.edit(embed=newEmbed)
-
-
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):

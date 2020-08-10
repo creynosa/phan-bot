@@ -5,6 +5,7 @@ from discord.ext import commands
 TOKEN = os.environ['only-phans-bot-token']
 bot = commands.Bot(command_prefix='!')
 
+
 @bot.event
 async def on_ready():
     """Print a console message when the bot is ready and active."""
