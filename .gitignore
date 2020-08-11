@@ -14,4 +14,4 @@ discord_bots_token
 .classpath
 .project
 /venv/
-pingpong
+.vscode
