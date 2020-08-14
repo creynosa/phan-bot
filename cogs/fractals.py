@@ -176,7 +176,7 @@ class Fractals(commands.Cog):
             blankSpecs = blankRoster
 
             channel = self.bot.get_channel(Fractals.channelID)
-            # await channel.send(f'{fractalRole.mention}')
+            await channel.send(f'{fractalRole.mention}')
             finalMessage = await channel.send(
                 embed= await Fractals.createFractalEmbed(
                     embedDescription,
