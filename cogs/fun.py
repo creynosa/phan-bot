@@ -17,7 +17,8 @@ class Fun(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.id == 293589451815387146:
-            if 'fractal god' in message.content.lower():
+            msg = message.content.lower()
+            if 'fractal' in msg and 'god' in msg:
                 await message.channel.send('<a:yapp:745690994661523519>')
         else:
             return
