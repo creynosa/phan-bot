@@ -42,6 +42,19 @@ class Fun(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
+    async def bagu(self, ctx):
+        baguID = 246875516387328000
+        baguUser = await self.bot.fetch_user(baguID)
+
+        embed = Fun.embedMessage('Bringing a new meaning to "small dps",\' aren\'t ya, bud?')
+        await ctx.send(f'{baguUser.mention}', embed=embed)
+
+    @commands.command()
+    async def enter(self, ctx):
+        embed = Fun.embedMessage('https://i.imgur.com/tNSoLk5.png')
+        await ctx.send(embed=embed)
+
+    @commands.command()
     async def thanoscat(self, ctx):
         embed = Fun.embedMessage("https://i.imgur.com/z2RtWzN.jpg")
         await ctx.send(embed=embed)
