@@ -23,6 +23,13 @@ class Fun(commands.Cog):
         else:
             return
 
+    @commands.command()
+    async def eversong(self, ctx):
+        eversongID = 293589451815387146
+        eversongUser = self.bot.fetch_user(eversongID)
+
+        embed = Fun.embedMessage('You\'re a fractal what now?')
+        await ctx.send(f'{eversongUser.mention}', embed=embed)
 
     @commands.command()
     async def caprikachu(self, ctx):
