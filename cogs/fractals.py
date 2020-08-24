@@ -23,6 +23,10 @@ class Fractals(commands.Cog):
     @commands.command()
     async def fractal(self, ctx, level=None):
         await ctx.message.delete()
+        channel = self.bot.get_channel(Fractals.channelID)
+
+        if ctx.channel != channel:
+            return
 
         guild = ctx.guild
         fractalRole = guild.get_role(Fractals.roleID)
@@ -175,7 +179,6 @@ class Fractals(commands.Cog):
 
             blankSpecs = blankRoster
 
-            channel = self.bot.get_channel(Fractals.channelID)
             await channel.send(f'{fractalRole.mention}')
             finalMessage = await channel.send(
                 embed= await Fractals.createFractalEmbed(
