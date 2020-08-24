@@ -46,7 +46,7 @@ class Fun(commands.Cog):
         baguID = 246875516387328000
         baguUser = await self.bot.fetch_user(baguID)
 
-        embed = Fun.embedMessage('Bringing a new meaning to "small dps",\' aren\'t ya, bud?')
+        embed = Fun.embedMessage('Bringing a new meaning to "small dps", aren\'t ya, bud?')
         await ctx.send(f'{baguUser.mention}', embed=embed)
 
     @commands.command()
