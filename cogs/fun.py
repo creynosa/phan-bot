@@ -37,7 +37,7 @@ class Fun(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command()
-    async def caprikachu(self, ctx):
+    async def bagu4k(self, ctx):
         embed = Fun.embedMessage('https://i.imgur.com/Wp9aJ4q.png')
         await ctx.send(embed=embed)
 
