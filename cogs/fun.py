@@ -42,14 +42,6 @@ class Fun(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def bagu(self, ctx):
-        baguID = 246875516387328000
-        baguUser = await self.bot.fetch_user(baguID)
-
-        embed = Fun.embedMessage('Bringing a new meaning to "small dps", aren\'t ya, bud?')
-        await ctx.send(f'{baguUser.mention}', embed=embed)
-
-    @commands.command()
     async def enter(self, ctx):
         embed = Fun.embedMessage('https://i.imgur.com/tNSoLk5.png')
         await ctx.send(embed=embed)
@@ -58,6 +50,14 @@ class Fun(commands.Cog):
     async def thanoscat(self, ctx):
         embed = Fun.embedMessage("https://i.imgur.com/z2RtWzN.jpg")
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def marshiie(self, ctx):
+        marshiieID = 142809966749679616
+        marshiieUser = await self.bot.fetch_user(marshiieID)
+
+        embed = Fun.embedMessage("https://i.imgur.com/UgiwdJV.png")
+        await ctx.send(f"Introducing: the <:ayaya:745792801215610930> Ayaya {marshiieUser.mention} Collection™ <:ayaya:745792801215610930>", embed=embed)
 
 def setup(bot):
     bot.add_cog(Fun(bot))
