@@ -562,7 +562,10 @@ class Fractals(commands.Cog):
             fractalEmbedsToml = toml.load(g)
         
         # Retrieving information from the original embed.
-        fractalEmbedDict = fractalEmbedsToml[str(messageID)]
+        try:
+            fractalEmbedDict = fractalEmbedsToml[str(messageID)]
+        except:
+            return
         level = fractalEmbedDict['Level']
         oldDescription = fractalEmbedDict['Description']
         oldTime = fractalEmbedDict['Time']
