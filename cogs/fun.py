@@ -57,7 +57,7 @@ class Fun(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def marshiie(self, ctx):
+    async def marshiiee(self, ctx):
         marshiieID = 142809966749679616
         marshiieUser = await self.bot.fetch_user(marshiieID)
 
