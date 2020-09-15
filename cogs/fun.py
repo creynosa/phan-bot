@@ -64,5 +64,10 @@ class Fun(commands.Cog):
         embed = Fun.embedMessage("https://i.imgur.com/UgiwdJV.png")
         await ctx.send(f"Introducing: the <:ayaya:745792801215610930> Ayaya {marshiieUser.mention} Collection™ <:ayaya:745792801215610930>", embed=embed)
 
+    @commands.command()
+    async def maniicc(self, ctx):
+        embed = Fun.embedMessage('https://i.imgur.com/k94JJVU.png')
+        await ctx.send(embed=embed)
+
 def setup(bot):
     bot.add_cog(Fun(bot))
