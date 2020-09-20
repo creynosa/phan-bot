@@ -18,7 +18,10 @@ async def on_ready():
 # Loads all cogs when ready
 for filename in os.listdir('cogs'):
     if filename.endswith('.py') and filename != '__init__.py':
-        bot.load_extension(f"cogs.{filename[:-3]}")
+        if filename in ['fractals.py']:
+            pass
+        else:
+            bot.load_extension(f"cogs.{filename[:-3]}")
 
 
 @bot.event
