@@ -1,4 +1,5 @@
 import discord
+import re
 from discord.ext import commands
 
 class Fun(commands.Cog):
@@ -16,12 +17,18 @@ class Fun(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author.id == 293589451815387146:
+        eversongID = 293589451815387146
+        if message.author.id == eversongID:
+            eversongUser = self.bot.get_user(eversongID)
             msg = message.content.lower()
             if 'fractal' in msg and 'god' in msg:
                 await message.channel.send('<a:yapp:745690994661523519>')
-        else:
-            return
+            else:
+                pingRegex = re.compile(r"""<@!\d{18}>'""")
+                matches = re.match(pingRegex, msg)
+                if matches is not None:
+                    await message.channel.send(f'{eversongUser.mention}')
+
 
     @commands.command()
     async def eversong(self, ctx):
@@ -69,6 +76,7 @@ class Fun(commands.Cog):
     async def maniicc(self, ctx):
         embed = Fun.embedMessage('https://i.imgur.com/k94JJVU.png')
         await ctx.send(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))
