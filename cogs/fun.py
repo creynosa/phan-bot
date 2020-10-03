@@ -77,6 +77,13 @@ class Fun(commands.Cog):
         embed = Fun.embedMessage('https://i.imgur.com/k94JJVU.png')
         await ctx.send(embed=embed)
 
+    @commands.command()
+    async def kat(self, ctx):
+        choyaFilePath = 'choyabongo.gif'
+        with open(choyaFilePath, 'rb') as f:
+            discordFile = discord.File(f)
+        
+        await ctx.send(file=discordFile)
 
 def setup(bot):
     bot.add_cog(Fun(bot))
