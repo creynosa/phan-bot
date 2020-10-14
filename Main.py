@@ -2,7 +2,7 @@ import os
 from discord.ext import commands
 
 # Main Bot Token
-TOKEN = os.environ['only-phans-bot-token']
+TOKEN = os.environ['phan-bot-token']
 bot = commands.Bot(command_prefix='!')
 
 
