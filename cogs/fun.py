@@ -79,7 +79,7 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def kat(self, ctx):
-        choyaFilePath = 'choyabongo.gif'
+        choyaFilePath = 'resources/images/choyabongo.gif'
         with open(choyaFilePath, 'rb') as f:
             discordFile = discord.File(f)
         
