@@ -13,5 +13,5 @@ discord_bots_token
 .settings/
 .classpath
 .project
-/venv/
+venv
 .vscode
