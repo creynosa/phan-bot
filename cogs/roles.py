@@ -1,115 +1,100 @@
 import discord
 from discord.ext import commands
 
+
 class RoleAssignment(commands.Cog):
-    
     def __init__(self, bot):
         self.bot = bot
 
-    # Emoji ID to role
-    emojiDict = {
-        '<:dungeon:737552892226961509>': 737555953875943475, #dungeons
-        '<:fractalx:742424888190566570>': 737555903275859999, #fractals
-        '<:raid:737553929411493930>': 737555904760643698, #raids
-        '<:strike:737553953583267880>': 737555901023518801, #strikes
-        '<:among_us:749727834527891476>': 749723933200220272, #among us
+    guildID = 733944519640350771
+
+    roles = {
+        "strikes": 737555901023518801,
+        "fractals": 737555903275859999,
+        "raids": 737555904760643698,
+        "dungeons": 737555953875943475,
+        "among-us": 749723933200220272,
+        "phasmophobia": 764391990178611230,
     }
 
-    @commands.command()
-    @commands.has_role('Phan')
-    async def initiate(self, ctx):
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if not message.content.startswith("!"):
+            return
 
+        channel = message.channel
+        member = message.author
+        splitMessage = message.content.split()
+        command = splitMessage[0]
+
+        if command == "!role":
+            try:
+                roleName = splitMessage[1]
+                if RoleAssignment.validRole(roleName):
+                    role = RoleAssignment.getRole(self, roleName)
+                    if RoleAssignment.hasRole(self, roleName, member):
+                        await member.remove_roles(role)
+                        await RoleAssignment.sendConfirmation(
+                            self, channel, added=False
+                        )
+                    else:
+                        await member.add_roles(role)
+                        await RoleAssignment.sendConfirmation(self, channel)
+                else:
+                    await RoleAssignment.sendInvalidRole(self, channel)
+            except IndexError:
+                await RoleAssignment.sendMissingRole(self, channel)
+        elif command == "!roles":
+            await RoleAssignment.sendRoles(self, channel)
+
+    @staticmethod
+    def validRole(roleName):
+        return True if roleName in RoleAssignment.roles else False
+
+    def getRole(self, roleName):
+        roleID = RoleAssignment.roles[roleName]
+        guild = self.bot.get_guild(RoleAssignment.guildID)
+        role = guild.get_role(roleID)
+        return role
+
+    def hasRole(self, roleName, member):
+        role = RoleAssignment.getRole(self, roleName)
+        return True if role in member.roles else False
+
+    async def sendConfirmation(self, channel, added=True):
+        keyword = "added" if added else "removed"
         embed = discord.Embed(
-            color=0x01a8ef,
-            description='test',
+            description=f"Role successfully {keyword}!",
+            color=0xFFFFFF,
         )
+        await channel.send(embed=embed)
 
-        await ctx.send(embed=embed)
-    
-    @commands.command()
-    @commands.has_role('Phan')
-    async def updateEmbed(self, ctx):
-
-        roleAssignChannelID = 737551865717194783
-        roleAssignChannel = await self.bot.fetch_channel(roleAssignChannelID)
-
-        roleMsgID = 749726421546434641
-        roleMsg = await roleAssignChannel.fetch_message(roleMsgID)
-
-
-        roleText = "React with the following emojis to assing yourself a GW2 role. \n \n" \
-            "<:dungeon:737552892226961509> : @dungeons \n" \
-            "<:fractalx:742424888190566570> : @fractals \n" \
-            "<:raid:737553929411493930> : @raids \n" \
-            "<:strike:737553953583267880> : @strikes \n\n" \
-            "__**Other Roles**__ \n\n" \
-            "<:among_us:749727834527891476> : @among us \n" 
-
-        newEmbed = discord.Embed(
-            color=0x01a8ef,
-            description=roleText,
+    async def sendInvalidRole(self, channel):
+        embed = discord.Embed(
+            description="Not a valid role. Please try again!",
+            color=0xFFFFFF,
         )
+        await channel.send(embed=embed)
 
-        await roleMsg.edit(embed=newEmbed)
+    async def sendRoles(self, channel):
+        rolesString = ""
+        for role in RoleAssignment.roles:
+            rolesString += f"{role} \n"
+        embed = discord.Embed(
+            title="Available Roles",
+            description=rolesString,
+            color=0xFFFFFF,
+        )
+        await channel.send(embed=embed)
 
-        for emojiID in RoleAssignment.emojiDict:
-            emoji = self.bot.get_emoji(emojiID)
-            await roleMsg.add_reaction(emoji)
-        
-        return
+    async def sendMissingRole(self, channel):
+        embed = discord.Embed(
+            description='"!role" requires a role to be assigned or removed.'
+            "\n\nExample: !role phasmophobia",
+            color=0xFFFFFF,
+        )
+        await channel.send(embed=embed)
 
-    @commands.Cog.listener()
-    async def on_raw_reaction_add(self, payload):
-        guildID = payload.guild_id
-        guild = self.bot.get_guild(guildID)
-        member = payload.member
-        emoji = payload.emoji
-        messageID = 749726421546434641
-
-        # Ignores bot's own reactions
-        if payload.user_id == self.bot.user.id:
-            return
-
-        # Ignore any non-relevant reactions
-        if payload.message_id != messageID:
-            return
-
-        emojiRoleID = RoleAssignment.emojiDict[str(emoji)]
-        emojiRole = guild.get_role(emojiRoleID)
-
-        if emojiRole not in member.roles:
-            await member.add_roles(emojiRole)
-        else:
-            return
-    
-    @commands.Cog.listener()
-    async def on_raw_reaction_remove(self, payload):
-        guildID = payload.guild_id
-        guild = self.bot.get_guild(guildID)
-        userID = payload.user_id
-        emoji = payload.emoji
-        messageID = 749726421546434641
-
-        # Ignores bot's own reactions
-        if payload.user_id == self.bot.user.id:
-            return
-
-        # Ignore any non-relevant reactions
-        if payload.message_id != messageID:
-            return
-        
-        try:
-            member = guild.get_member(userID)
-        except:
-            return
-
-        emojiRoleID = RoleAssignment.emojiDict[str(emoji)]
-        emojiRole = guild.get_role(emojiRoleID)
-
-        if emojiRole in member.roles:
-            await member.remove_roles(emojiRole)
-        else:
-            return
 
 def setup(bot):
     bot.add_cog(RoleAssignment(bot))
