@@ -15,6 +15,7 @@ class RoleAssignment(commands.Cog):
         "dungeons": 737555953875943475,
         "among-us": 749723933200220272,
         "phasmophobia": 764391990178611230,
+        "raft": 768513337444139008,
     }
 
     @commands.Cog.listener()
