@@ -16,6 +16,7 @@ class RoleAssignment(commands.Cog):
         "among-us": 749723933200220272,
         "phasmophobia": 764391990178611230,
         "raft": 768513337444139008,
+        "minecraft": 768751825405870150,
     }
 
     @commands.Cog.listener()
