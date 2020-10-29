@@ -7,6 +7,7 @@ class RoleAssignment(commands.Cog):
         self.bot = bot
 
     guildID = 733944519640350771
+    newRoleID = 771400729075515443
 
     roles = {
         "strikes": 737555901023518801,
@@ -48,6 +49,14 @@ class RoleAssignment(commands.Cog):
                 await RoleAssignment.sendMissingRole(self, channel)
         elif command == "!roles":
             await RoleAssignment.sendRoles(self, channel)
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        print("Member successfully joined!")
+        guild = self.bot.get_guild(RoleAssignment.guildID)
+        newRole = guild.get_role(RoleAssignment.newRoleID)
+
+        await member.add_roles(newRole)
 
     @staticmethod
     def validRole(roleName):

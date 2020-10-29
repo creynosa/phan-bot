@@ -1,9 +1,14 @@
 import os
+import discord
 from discord.ext import commands
 
 # Main Bot Token
-TOKEN = os.environ["only-phans-bot-token"]
-bot = commands.Bot(command_prefix="!")
+intents = discord.Intents.default()
+intents.members = True
+intents.presences = True
+
+TOKEN = os.environ["phan-bot-token"]
+bot = commands.Bot(command_prefix="!", intents=intents)
 
 
 @bot.event
