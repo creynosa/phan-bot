@@ -32,7 +32,7 @@ class RoleAssignment(commands.Cog):
 
         if command == "!role":
             try:
-                roleName = splitMessage[1]
+                roleName = splitMessage[1].lower()
                 if RoleAssignment.validRole(roleName):
                     role = RoleAssignment.getRole(self, roleName)
                     if RoleAssignment.hasRole(self, roleName, member):
