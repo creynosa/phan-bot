@@ -10,13 +10,10 @@ class RoleAssignment(commands.Cog):
     newRoleID = 771400729075515443
 
     roles = {
-        "strikes": 737555901023518801,
         "fractals": 737555903275859999,
         "raids": 737555904760643698,
-        "dungeons": 737555953875943475,
         "among-us": 749723933200220272,
         "phasmophobia": 764391990178611230,
-        "raft": 768513337444139008,
         "minecraft": 768751825405870150,
     }
 
