@@ -9,34 +9,34 @@ class Fun(commands.Cog):
 
     @staticmethod
     def embedMessage(string):
+        """Returns a simple colored embed for use with text or images."""
         if string.startswith("http"):
             embed = discord.Embed(color=0xFFFFFF)
             embed.set_image(url=string)
         else:
             embed = discord.Embed(description=string, color=0xFFFFFF)
+
         return embed
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        """Executes code blocks when certain messages are sent."""
+
+        # Fun message responding to Eversong or Bagu saying "Fractal God."
         eversongID = 293589451815387146
-        if message.author.id == eversongID:
-            eversongUser = self.bot.get_user(eversongID)
-            msg = message.content.lower()
-            if "fractal" in msg and "god" in msg:
+        baguID = 246875516387328000
+
+        msg = message.content.lower()
+        if "fractal" in msg and "god" in msg:
+            if message.author.id == eversongID:
                 await message.channel.send("<a:yapp:745690994661523519>")
-            else:
-                pingRegex = re.compile(r"""<@!\d{18}>'""")
-                matches = re.match(pingRegex, msg)
-                if matches is not None:
-                    await message.channel.send(f"{eversongUser.mention}")
+            elif message.author.id == baguID:
+                baguEmbed = Fun.embedMessage("soon™")
+                await message.channel.send(embed=baguEmbed)
 
     @commands.command()
     async def eversong(self, ctx):
-        # eversongID = 293589451815387146
-        # eversongUser = await self.bot.fetch_user(eversongID)
-
         embed = Fun.embedMessage("https://i.imgur.com/HijmLV8.jpg")
-        # await ctx.send(f'{eversongUser.mention}', embed=embed)
         await ctx.send(embed=embed)
 
     @commands.command()
@@ -71,7 +71,8 @@ class Fun(commands.Cog):
 
         embed = Fun.embedMessage("https://i.imgur.com/UgiwdJV.png")
         await ctx.send(
-            f"Introducing: the <:ayaya:745792801215610930> Ayaya {marshiieUser.mention} Collection™ <:ayaya:745792801215610930>",
+            f"Introducing: the <:ayaya:745792801215610930> Ayaya"
+            f"{marshiieUser.mention} Collection™ <:ayaya:745792801215610930>",
             embed=embed,
         )
 

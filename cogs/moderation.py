@@ -15,21 +15,6 @@ class Moderation(commands.Cog):
         await channel.purge(limit=int(num))
         return
 
-    @commands.command()
-    @commands.has_role("Phan")
-    async def emptyTempFiles(self, ctx, num):
-        files = ["fractalembeds.toml", "fractalteams.toml", "fractalteamspecs.toml"]
-
-        for fileName in files:
-            with open(fileName, "w") as f:
-                f.seek(0)
-                f.truncate()
-
-        msg = await ctx.send("Files emptied!")
-        await msg.delete(delay=3)
-
-        return
-
 
 def setup(bot):
     bot.add_cog(Moderation(bot))

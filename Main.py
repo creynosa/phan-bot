@@ -2,11 +2,12 @@ import os
 import discord
 from discord.ext import commands
 
-# Main Bot Token
+# Enabling newly added discord intents.
 intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
 
+# Setting up the discord bot.
 TOKEN = os.environ["phan-bot-token"]
 bot = commands.Bot(command_prefix="!", intents=intents)
 
@@ -19,19 +20,27 @@ async def on_ready():
     print(bot.user.id)
     print("------")
 
-
-# Loads all cogs when ready
-for filename in os.listdir("cogs"):
-    if filename.endswith(".py") and filename != "__init__.py":
-        bot.load_extension(f"cogs.{filename[:-3]}")
+    # Loads all cogs when ready
+    for filename in os.listdir("cogs"):
+        if filename.endswith(".py") and filename != "__init__.py":
+            bot.load_extension(f"cogs.{filename[:-3]}")
 
 
 @bot.event
 async def on_message(message):
+    """Executes certain code blocks upon a message being sent."""
+
+    # Ignore the bot's own messages.
     if message.author == bot.user:
         return
+
+    # Ignore commands from working through DMs.
+    if type(message.channel) == discord.DMChannel:
+        return
+
     await bot.process_commands(message)
 
 
 # Initialize the Bot
-bot.run(TOKEN)
+if __name__ == "__main__":
+    bot.run(TOKEN)
