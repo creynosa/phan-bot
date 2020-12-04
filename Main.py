@@ -6,6 +6,7 @@ from discord.ext import commands
 intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
+intents.reactions = True
 
 # Setting up the discord bot.
 TOKEN = os.environ["phan-bot-token"]
