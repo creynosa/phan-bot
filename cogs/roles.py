@@ -35,6 +35,27 @@ class Roles(commands.Cog):
         return initialEmbed
 
     @staticmethod
+    def createGW2Embed():
+        """Creates and returns a custom embed for the role embed command."""
+
+        initialEmbed = discord.Embed(
+            title="GW2 Roles",
+            description="""**React to sign up for the following roles**:
+
+            <:fractals:784312868987338782> @fractals
+            <:raids:784312867720921108> @raids
+            <:strikes:784314456901550110> @strikes
+            <:dungeons:784314457186631680> @dungeons""",
+            color=0xFFFFFF,
+        )
+        initialEmbed.set_author(
+            name="Phan Bot",
+            icon_url=Roles.embedLogoURL,
+        )
+
+        return initialEmbed
+
+    @staticmethod
     def createInitialEmbed():
         """Creates and returns the initial embed for the role embed commands."""
 
@@ -245,7 +266,7 @@ class Roles(commands.Cog):
         response = await Roles.checkResponse(self, ctx, vCheck=check_1A)
 
         channel = await commands.TextChannelConverter().convert(ctx, response)
-        roleEmbed = Roles.createGameRolesEmbed()
+        roleEmbed = Roles.createGW2Embed()
 
         await channel.send(embed=roleEmbed)
 
@@ -309,7 +330,7 @@ class Roles(commands.Cog):
             embedMessage = await commands.MessageConverter().convert(ctx, response)
 
             # Updating role emojis
-            config = toml.load("configurations\\role_assignments.toml")
+            config = toml.load("configurations/role_assignments.toml")
             while True:
                 # Asking for an Emoji.
                 nextEmbed = Roles.createEmbed_2B()
@@ -341,7 +362,7 @@ class Roles(commands.Cog):
                     continue
                 else:
                     with open(
-                        "configurations\\role_assignments.toml", "w"
+                        "configurations/role_assignments.toml", "w"
                     ) as configfile:
                         toml.dump(config, configfile)
                     break
@@ -375,7 +396,7 @@ class Roles(commands.Cog):
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
-        config = toml.load("configurations\\role_assignments.toml")
+        config = toml.load("configurations/role_assignments.toml")
 
         if payload.message_id in list(config["EmbeddedMessagesIDs"].values()):
             if str(payload.emoji) in config["Roles"]:
@@ -393,7 +414,7 @@ class Roles(commands.Cog):
 
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self, payload):
-        config = toml.load("configurations\\role_assignments.toml")
+        config = toml.load("configurations/role_assignments.toml")
 
         if payload.message_id in list(config["EmbeddedMessagesIDs"].values()):
             if str(payload.emoji) in config["Roles"]:
