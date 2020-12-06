@@ -89,6 +89,11 @@ class Fun(commands.Cog):
 
         await ctx.send(file=discordFile)
 
+    @commands.command()
+    async def pusher(self, ctx):
+        embed = Fun.embedMessage("https://i.imgur.com/0mHp2wx.png")
+        await ctx.send(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))
