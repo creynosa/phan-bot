@@ -398,6 +398,9 @@ class Roles(commands.Cog):
     async def on_raw_reaction_add(self, payload):
         config = toml.load("configurations/role_assignments.toml")
 
+        # print(payload.message_id)
+        # print(list(config["EmbeddedMessagesIDs"].values()))
+
         if payload.message_id in list(config["EmbeddedMessagesIDs"].values()):
             if str(payload.emoji) in config["Roles"]:
                 guildID = config["GuildID"]["onlyphans"]
