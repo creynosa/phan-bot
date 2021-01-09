@@ -83,11 +83,14 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def kat(self, ctx):
-        choyaFilePath = "resources/images/choyabongo.gif"
-        with open(choyaFilePath, "rb") as f:
-            discordFile = discord.File(f)
+        # choyaFilePath = "resources/images/choyabongo.gif"
+        # with open(choyaFilePath, "rb") as f:
+        #     discordFile = discord.File(f)
 
-        await ctx.send(file=discordFile)
+        embed = Fun.embedMessage("https://i.imgur.com/FJgfFTi.png")
+        await ctx.send(embed=embed)
+
+        # await ctx.send(file=discordFile)
 
     @commands.command()
     async def pusher(self, ctx):
