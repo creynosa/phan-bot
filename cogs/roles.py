@@ -34,6 +34,29 @@ class Roles(commands.Cog):
 
         return initialEmbed
 
+    @commands.command()
+    @commands.is_owner()
+    async def updateExistingEmbed(self, ctx, embedID):
+        """Updates the text for an existing embed"""
+        originEmbed = await commands.MessageConverter().convert(ctx, embedID)
+        newEmbed = discord.Embed(
+            title="Game Roles",
+            description="""**React to sign up for the following roles**:
+
+            <:choyayaya:761762764271124491> @guildwars2
+            <:ghostblob:781714216058355722> @phasmophobia
+            <:among_us:781714930604310528> @among-us
+            <:minecraft:781715314668077077> @minecraft
+            <:guildmissions:798133880381112330> @guild missions""",
+            color=0xFFFFFF,
+        )
+        newEmbed.set_author(
+            name="Phan Bot",
+            icon_url=Roles.embedLogoURL,
+        )
+
+        await originEmbed.edit(embed=newEmbed)
+
     @staticmethod
     def createGW2Embed():
         """Creates and returns a custom embed for the role embed command."""
