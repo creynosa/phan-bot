@@ -42,13 +42,12 @@ class Roles(commands.Cog):
         newEmbed = discord.Embed(
             title="Game Roles",
             description="""**React to sign up for the following roles**:
-
-            <:choyayaya:761762764271124491> @guildwars2
-            <:ghostblob:781714216058355722> @phasmophobia
-            <:among_us:781714930604310528> @among-us
-            <:minecraft:781715314668077077> @minecraft
-            <:guildmissions:798133880381112330> @guild missions
-            <:die:798148904712667146> @tabletop""",
+            
+            <:fractals:784312868987338782> @fractals
+            <:raids:784312867720921108> @raids
+            <:strikes:784314456901550110> @strikes
+            <:dungeons:784314457186631680> @dungeons
+            <:guildmissions:798133880381112330> @guild missions""",
             color=0xFFFFFF,
         )
         newEmbed.set_author(
@@ -64,28 +63,13 @@ class Roles(commands.Cog):
 
         initialEmbed = discord.Embed(
             title="#OnlyPhans Calendar (CST)",
-            description="""**Monday**
-            `Guild Missons`  -  6:00 p.m.
-
-            **Tuesday**
-            `Wing 1`  -  7:00 p.m.
-
-            **Wednesday**
-            `Wing 2`  -  7:00 p.m.
-
-            **Thursday**
-            `Wing 3`  -  7:00 p.m.
-
-            **Friday**
-            `Wing 4`  -  7:00 p.m.
-
-            **Saturday**
-            `Wing 5`  -  4:00 p.m.
-            `Tabletop Night`  -  10:30 p.m.
-
-            **Sunday**
-            `Wings 6 and 7`  -  4:00 p.m.
-            """,
+            description="""**React to sign up for the following roles**:
+            
+            <:fractals:784312868987338782> @fractals
+            <:raids:784312867720921108> @raids
+            <:strikes:784314456901550110> @strikes
+            <:dungeons:784314457186631680> @dungeons
+            <:guildmissions:798133880381112330> @guild missions""",
             color=0xFFFFFF,
         )
         initialEmbed.set_author(
