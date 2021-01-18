@@ -1,3 +1,5 @@
+# A module containing various fun and simple commands for discord.
+
 import discord
 import re
 from discord.ext import commands
@@ -9,10 +11,16 @@ class Fun(commands.Cog):
 
     @staticmethod
     def embedMessage(string):
-        """Returns a simple colored embed for use with text or images."""
+        """Returns a simple embed containing text or a picture.
+
+        PARAMTERS
+        string (str): text or an url to be displayed in an embed."""
+        # If the user inputs an URL, the embed will only have the picture
+        # displayed.
         if string.startswith("http"):
             embed = discord.Embed(color=0xFFFFFF)
             embed.set_image(url=string)
+        # Anything else will generate a basic embed with text.
         else:
             embed = discord.Embed(description=string, color=0xFFFFFF)
 
@@ -20,17 +28,18 @@ class Fun(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        """Executes code blocks when certain messages are sent."""
-
-        # Fun message responding to Eversong or Bagu saying "Fractal God."
-        eversongID = 293589451815387146
-        baguID = 246875516387328000
-
+        """Executes certain code blocks when a message is sent."""
+        # Change the message's content to lowercase for case insensitivity.
         msg = message.content.lower()
+
+        # Fun messages sent when either Bagu or Eversong (two discord members)
+        # send a message with the phrase "Fractal God."
         if "fractal" in msg and "god" in msg:
             if message.author.id == eversongID:
+                eversongID = 293589451815387146
                 await message.channel.send("<a:yapp:745690994661523519>")
             elif message.author.id == baguID:
+                baguID = 246875516387328000
                 baguEmbed = Fun.embedMessage("soon™")
                 await message.channel.send(embed=baguEmbed)
 

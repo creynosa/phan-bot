@@ -7,6 +7,7 @@ intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
 intents.reactions = True
+intents.messages = True
 
 # Setting up the discord bot.
 TOKEN = os.environ["phan-bot-token"]
@@ -21,7 +22,7 @@ async def on_ready():
     print(bot.user.id)
     print("------")
 
-    # Loads all cogs when ready
+    # Loads all the included cogs when ready.
     for filename in os.listdir("cogs"):
         if filename.endswith(".py") and filename != "__init__.py":
             bot.load_extension(f"cogs.{filename[:-3]}")

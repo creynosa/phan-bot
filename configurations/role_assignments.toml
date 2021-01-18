@@ -1,15 +1,13 @@
-[GuildID]
-onlyphans = 733944519640350771
-
-[ChannelID]
-channel = 784284121957924894
-
 [EmbeddedMessagesIDs]
+# The message IDs for embedded messages that rely on reactions for role assignments.
+# The names are irrelevant and are only provided for more detail.
 gameroles = 784287263311265824
 gw2roles = 784315067676098620
 
 [Roles]
-example = 1234567890
+# The string for a specific emote along with the ID of the role associated with it.
+# This is ONLY for use for any role-assignments done via emote reactions.
+# ANY AND ALL emoji/role combinations must be included here.
 "<:choyayaya:761762764271124491>" = 784290257101127702
 "<:ghostblob:781714216058355722>" = 764391990178611230
 "<:among_us:781714930604310528>" = 749723933200220272
